@@ -35,6 +35,7 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
         const option = document.createElement('option');
         option.innerHTML = neighborhood;
         option.value = neighborhood;
+        option.setAttribute('aria-label', neighborhood)
         select.append(option);
     });
 }

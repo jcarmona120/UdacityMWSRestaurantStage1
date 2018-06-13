@@ -77,6 +77,8 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
  */
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
     const hours = document.getElementById('restaurant-hours');
+    hours.setAttribute('role', 'restaurant hours');
+    hours.setAttribute('aria-label', 'Restaurant Hours')
     for (let key in operatingHours) {
         const row = document.createElement('tr');
 
@@ -154,8 +156,10 @@ createReviewHTML = (review) => {
 fillBreadcrumb = (restaurant = self.restaurant) => {
     const breadcrumb = document.getElementById('breadcrumb');
     const li = document.createElement('li');
+    const a = document.createElement('a');
     li.innerHTML = restaurant.name;
     breadcrumb.appendChild(li);
+    li.setAttribute('aria-current', restaurant.name)
 }
 
 /**
