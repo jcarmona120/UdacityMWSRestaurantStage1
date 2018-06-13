@@ -64,6 +64,11 @@ section {
     display: block;
 }
 
+#skipLink {
+    position: absolute;
+    top: -10000px;
+}
+
 #maincontent {
     background-color: #f3f3f3;
     min-height: 100%;
@@ -82,6 +87,11 @@ section {
     width: 100%;
 }
 
+#footer-info {
+    margin: 0;
+    width: 95%;
+}
+
 
 /* ====================== Navigation ====================== */
 
@@ -94,6 +104,7 @@ nav {
 
 nav h1 {
     margin: auto;
+    width: 90%;
 }
 
 nav h1 a {
@@ -104,7 +115,7 @@ nav h1 a {
     text-transform: uppercase;
 }
 
-#nav-title {
+.nav-title {
     padding: 1em;
 }
 
@@ -166,7 +177,7 @@ nav h1 a {
     height: 5.5em;
     background-color: #3397DB;
     align-items: center;
-    padding: 1em;
+    padding: 1em 2em;
 }
 
 .filter-options h2 {
@@ -369,8 +380,8 @@ nav h1 a {
 }
 
 #reviews-list li p {
-    margin: 0 10px 10px;
-    padding-top: 1em;
+    font-size: 1.5em;
+    padding: .4em;
 }
 
 #restaurant-hours td {
@@ -388,7 +399,8 @@ nav h1 a {
 }
 
 .review-date {
-    color: gray
+    font-size: 1.2em;
+    color: gray;
 }
 
 .review-rating {
@@ -396,23 +408,10 @@ nav h1 a {
     color: white;
     text-align: center;
     padding: .2em;
-    max-width: 20%;
+    max-width: 6em;
     border-radius: 8%;
+    margin-left: 1em;
 }
-
-
-/* @media (min-width: 800px) {
-  #restaurant-container {
-    display: grid;
-    grid-template-areas: 
-      "name"
-      "image" ;
-  }
-  #restaurants-list .restaurant-img {
-    grid-area: image;
-  }
-  
-} */
 
 @media (max-width: 480px) {
     .filter-options {
@@ -420,5 +419,28 @@ nav h1 a {
         flex-direction: column;
         justify-content: center;
         height: initial;
+        padding: 1em 0;
+    }
+    #reviews-list li p {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 720px) {
+    #restaurant-container {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .inside #map-container {
+        height: 22em;
+    }
+}
+
+@media (min-width: 720px) {
+    #restaurant-container {
+        display: flex;
+    }
+    .inside #map-container {
+        height: auto;
     }
 }
