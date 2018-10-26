@@ -15,6 +15,7 @@ body {
     background-color: #fdfdfd;
     margin: 0;
     position: relative;
+    overflow-x: hidden;
 }
 
 ul,
@@ -269,6 +270,10 @@ nav h1 a {
     text-transform: uppercase;
 }
 
+#restaurant-info {
+    padding-left: 1em;
+}
+
 
 /* ====================== Restaurant Details ====================== */
 
@@ -430,9 +435,11 @@ nav h1 a {
     #restaurant-container {
         display: flex;
         flex-direction: column-reverse;
+        align-items: center;
+        width: inherit;
     }
     .inside #map-container {
-        height: 22em;
+        width: 125%;
     }
 }
 
