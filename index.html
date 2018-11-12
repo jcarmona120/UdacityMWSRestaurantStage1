@@ -3,9 +3,14 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3367D6">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+    <link rel="preconnect" href="http://127.0.0.1:1337" />
     <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylehseet" src="./dist/css/styles.css" inline />
     <title>Jawann's Snobby Restaurant Reviews</title>
 
 </head>
@@ -19,9 +24,7 @@
     </header>
 
     <main id="maincontent" role="main">
-        <section id="map-container" role="application">
-            <div id="map"></div>
-        </section>
+       
         <section>
             <div class="filter-options">
                 <h2>Filter Results</h2>
@@ -39,27 +42,20 @@
             </div>
             <ul id="restaurants-list"></ul>
         </section>
+        <section id="map-container" role="application">
+            <div id="map"></div>
+        </section>
     </main>
-
-    <!-- Database helpers -->
-    <!-- <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
-   <script type="application/javascript" charset="utf-8" src="js/main.js"></script> -->
-
-    
-    <!-- Main javascript file -->
-    <!-- <script src="./js/restaurant_info.js"></script>
-    <script src="./js/dbhelper.js"></script> -->
-    <script src="./js/all.js"></script>
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoMtReqrjzZfl-ubFwu7eCTxQhNccmo0w&libraries=places&callback=initMap"></script>
    
-        
-
     <footer id="footer">
         <p id="footer-info">
             Copyright (c) 2018 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
         </p>
 
     </footer>
+
+     <script src="./dist/js/main_bundle.js" inline></script>
+     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoMtReqrjzZfl-ubFwu7eCTxQhNccmo0w&libraries=places&callback=initMap"></script>
 
 
 

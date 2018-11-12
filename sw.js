@@ -1,36 +1,105 @@
-var CACHE_NAME = 'restaurantreviews-cache-v1';
+importScripts('./idb.js')
+
+const dbPromise = idb.open('udacity-mws-stage-2-jc', 1, upgradeDB => {
+  upgradeDB.createObjectStore('restaurants');
+});
+  
+  const idbKeyval = {
+    get(key) {
+      return dbPromise.then(db => {
+        return db.transaction('restaurants')
+          .objectStore('restaurants').get(key);
+      });
+    },
+    set(key, val) {
+      return dbPromise.then(db => {
+        const tx = db.transaction('restaurants', 'readwrite');
+        tx.objectStore('restaurants').put(val, key);
+        return tx.complete;
+      });
+    },
+    delete(key) {
+      return dbPromise.then(db => {
+        const tx = db.transaction('restaurants', 'readwrite');
+        tx.objectStore('restaurants').delete(key);
+        return tx.complete;
+      });
+    },
+    clear() {
+      return dbPromise.then(db => {
+        const tx = db.transaction('restaurants', 'readwrite');
+        tx.objectStore('restaurants').clear();
+        return tx.complete;
+      });
+    },
+    keys() {
+      return dbPromise.then(db => {
+        const tx = db.transaction('restaurants');
+        const keys = [];
+        const store = tx.objectStore('restaurants');
+  
+        // This would be store.getAllKeys(), but it isn't supported by Edge or Safari.
+        // openKeyCursor isn't supported by Safari, so we fall back
+        (store.iterateKeyCursor || store.iterateCursor).call(store, cursor => {
+          if (!cursor) return;
+          keys.push(cursor.key);
+          cursor.continue();
+        });
+  
+        return tx.complete.then(() => keys);
+      });
+    }
+  };
+
+  
+
+var CACHE_NAME = 'mws-stage-2';
+var serverURL = 'http://127.0.0.1:1337/restaurants'
 var urlsToCache = [
-    '/',
-    './index.html',
-    './restaurant.html',
-    './css/styles.css',
-    './js/dbhelper.js',
-    './js/main.js',
-    './js/restaurant_info.js',
-    '/data/restaurants.json'
+    serverURL
 ];
 
-self.addEventListener('install', function(event) {
-    // Perform install steps
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-        .then(function(cache) {
-            console.log('Opened cache');
-            return cache.addAll(urlsToCache);
-        })
-    );
+self.addEventListener('install', function(e) {
+ e.waitUntil(
+   caches.open(CACHE_NAME).then(function(cache) {
+     console.log('opened cache')
+      
+     return cache.addAll([
+      '/',
+      './index.html',
+     './restaurant.html',
+     serverURL
+     ]);
+   })
+ );
+});
 
+self.addEventListener('activate', function(event) {
+  console.log('[ServiceWorker] Activate');
+  fetch('http://127.0.0.1:1337/restaurants')
+  .then(response => {
+		return response.json()
+  }).then(data => {
+      console.log('we got data')
+      console.log(data)
+      idbKeyval.set('restaurants', data);
+  })
 });
 
 self.addEventListener('fetch', function(event) {
-    event.respondWith(
-        caches.match(event.request)
-        .then(function(response) {
-            // Cache hit - return response
-            if (response) {
-                return response;
-            }
-            return fetch(event.request);
-        })
-    );
+
+  //  monitor requests
+  //  const acceptHeader = event.request.headers.get('accept')
+  //  console.log("Fetching", acceptHeader, event.request.url)
+
+  event.respondWith(
+    caches.match(event.request).then(function(resp) {
+      return resp || fetch(event.request).then(function(response) {
+        return caches.open(CACHE_NAME).then(function(cache) {
+          cache.put(event.request, response.clone());
+          return response;
+        });  
+      });
+    })
+  );
 });

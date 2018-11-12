@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3367D6">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+    <link rel="preconnect" href="http://127.0.0.1:1337" />
+    <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+    <link inline rel="stylesheet" src="../dist/css/styles.css" inline />
+    <title>Jawann's Resto Reviews</title>
+</head>
+
+<body>
+    <header role="banner">
+        <a href="#maincontent" id="skipLink">Skip to main content</a>
+        <nav role="navigation">
+            <h1 class="nav-title"><a href="/">Restaurant Reviews</a></h1>
+        </nav>
+    </header>
+
+    <main id="maincontent" role="main">
+       
+        <section>
+            <div class="filter-options">
+                <h2>Filter Results</h2>
+                <label for="neighborhoods-select">
+          <select role="listbox" id="neighborhoods-select" aria-label="select neighborhood" name="neighborhoods" onchange="updateRestaurants()" aria-activedescendant="all">
+            <option  id="all" value="all">All Neighborhoods</option>
+          </select>
+        </label>
+                <label for="cuisines-select">
+          <select role="listbox" id="cuisines-select" aria-label="select cuisines" name="cuisines" onchange="updateRestaurants()">
+            <option value="all">All Cuisines</option>
+          </select>
+        </label>
+
+            </div>
+            <ul id="restaurants-list"></ul>
+        </section>
+        <section id="map-container" role="application">
+            <div id="map"></div>
+        </section>
+    </main>
+
+    
+    <!-- Main javascript file -->
+   
+    <footer id="footer">
+        <p id="footer-info">
+            Copyright (c) 2018 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
+        </p>
+
+    </footer>
+    <script src="./js/main_bundle.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoMtReqrjzZfl-ubFwu7eCTxQhNccmo0w&libraries=places&callback=initMap"></script>
+</body>
+
+
+</html>

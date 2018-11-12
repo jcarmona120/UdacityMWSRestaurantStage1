@@ -1,21 +1,27 @@
 const gulp = require('gulp');
 const cleanCSS = require('gulp-clean-css');
 const autoprefixer = require('gulp-autoprefixer');
+const inlineSource = require('gulp-inline-source')
 
 const imagemin = require('gulp-imagemin')
 const imageminPngquant = require('imagemin-pngquant');
+const imageResize = require('gulp-image-resize')
+const responsive = require('gulp-responsive')
 
-const uglify = require('gulp-uglify');
-const pump = require('pump');
+const size = require('gulp-size')
+const terser = require('gulp-terser')
 const concat = require('gulp-concat');
 const babel = require('gulp-babel');
-const sourcemaps = require('gulp-sourcemaps');
+const eslint = require('gulp-eslint');
+
+var browserSync = require('browser-sync').create();
 
 
-gulp.task('default', ['minify-css', 'scripts'])
+gulp.task['body', []]
+gulp.task('js', ['main_js', 'restaurant_js', 'sw', 'idb']);
 
 gulp.task('styles', () => {
-    return gulp.src('./css/*.css')
+    return gulp.src('./source/css/*.css')
         .pipe(cleanCSS({ compatibility: 'ie8' }))
         .pipe(autoprefixer({
             browsers: ['last 2 versions']
@@ -25,41 +31,74 @@ gulp.task('styles', () => {
 });
 
 gulp.task('copy-html', () => {
+    var options = {
+           compress: false
+    };
     gulp.src('*.html')
-        .pipe(gulp.dest('dist'))
-})
+        .pipe(inlineSource(options))
+        .pipe(gulp.dest('dist'));
+});
 
 gulp.task('copy-images', () => {
-    return gulp.src('images/*')
+    return gulp.src('source/img/*')
+        .pipe(responsive({
+            '*.jpg': [
+                {width: 270, rename: { suffix: '-270'} },
+                {width: 600, rename: { suffix: '-600'} },
+            ]
+        },{
+        quality: 40,
+        progressive: true,
+        withMetaData: false,
+        }
+    ))
         .pipe(imagemin())
-        .pipe(gulp.dest('dist/images'))
-})
+        .pipe(gulp.dest('./dist/images'))
+});
 
-gulp.task('scripts', function() {
-    gulp.src('js/*.js')
-        .pipe(babel())
-        .pipe(concat('all.js'))
-        .pipe(gulp.dest('dist/js'))
-})
+gulp.task('main_js', () => {
+    return gulp.src(['source/js/dbhelper.js', 'source/js/main.js'] )
+        .pipe(concat('main_bundle.js'))
+        .pipe(terser())
+        .pipe(size({title: 'main scripts'}))
+        .pipe(gulp.dest('dist/js'));
+});
 
-gulp.task('scripts-dist', function() {
-    gulp.src('js/*.js')
-        .pipe(sourcemaps.init())
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
-        .pipe(concat('all.js'))
-        .pipe(uglify())
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist/js'))
-})
+gulp.task('restaurant_js', () => {
+    return gulp.src(['source/js/dbhelper.js', 'source/js/restaurant_info.js'])
+        .pipe(concat('restaurant_bundle.js'))
+        .pipe(terser())
+        .pipe(size({title: 'restaurant scripts'}))
+        .pipe(gulp.dest('dist/js'));
+});
 
-gulp.task('dist', [
-    'styles',
-    'scripts-dist',
-    'copy-html',
-    'copy-images'
-])
+gulp.task('sw', () => {
+    return gulp.src('sw.js')
+        .pipe(terser())
+        .pipe(size({title: 'sw'}))
+        .pipe(gulp.dest('dist'))
+
+});
+
+gulp.task('idb', () => {
+    return gulp.src(['idb.js'])
+        .pipe(terser())
+        .pipe(size({title: 'idb'}))
+        .pipe(gulp.dest('dist'))
+});
+
+
+
+gulp.task('browserSync', function() {
+    browserSync.init({
+      server: {
+        baseDir: 'dist'
+      },
+    });
+});
+
+
+
 
 
 
