@@ -1,6 +1,6 @@
 {
-  "short_name": "Reviews",
-  "name": "Jawann's Reviews",
+  "short_name": "Maps",
+  "name": "Google Maps",
   "icons": [
     {
       "src": "/images/icons-192.png",
@@ -13,9 +13,9 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/index.html",
+  "start_url": "/",
   "background_color": "#3367D6",
   "display": "standalone",
-  "scope": "/maps/",
+  "scope": "/",
   "theme_color": "#3367D6"
 }
