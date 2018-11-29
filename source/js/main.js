@@ -10,6 +10,7 @@ var markers = [];
 document.addEventListener('DOMContentLoaded', (event) => {
     fetchNeighborhoods();
     fetchCuisines();
+    
 });
 
 /**
@@ -164,10 +165,54 @@ createRestaurantHTML = (restaurant) => {
     more.innerHTML = 'View Details';
     more.href = DBHelper.urlForRestaurant(restaurant);
     more.setAttribute('aria-label', `Learn more about ${restaurant.name}`)
-    li.append(more)
+    li.append(more);
 
-    return li
+    console.log(restaurant)
+    
+    let isFavorite = restaurant.is_favorite;
+    console.log(isFavorite, restaurant.name)
+    const isFavoriteSrc = '<img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjMycHgiIGhlaWdodD0iMzJweCIgdmlld0JveD0iMCAwIDUxMCA1MTAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMCA1MTA7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8ZyBpZD0iZmF2b3JpdGUiPgoJCTxwYXRoIGQ9Ik0yNTUsNDg5LjZsLTM1LjctMzUuN0M4Ni43LDMzNi42LDAsMjU3LjU1LDAsMTYwLjY1QzAsODEuNiw2MS4yLDIwLjQsMTQwLjI1LDIwLjRjNDMuMzUsMCw4Ni43LDIwLjQsMTE0Ljc1LDUzLjU1ICAgIEMyODMuMDUsNDAuOCwzMjYuNCwyMC40LDM2OS43NSwyMC40QzQ0OC44LDIwLjQsNTEwLDgxLjYsNTEwLDE2MC42NWMwLDk2LjktODYuNywxNzUuOTUtMjE5LjMsMjkzLjI1TDI1NSw0ODkuNnoiIGZpbGw9IiNEODAwMjciLz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />';
+    const notFavoriteSrc = '<img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjMycHgiIGhlaWdodD0iMzJweCIgdmlld0JveD0iMCAwIDUxMCA1MTAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMCA1MTA7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8ZyBpZD0iZmF2b3JpdGUiPgoJCTxwYXRoIGQ9Ik0yNTUsNDg5LjZsLTM1LjctMzUuN0M4Ni43LDMzNi42LDAsMjU3LjU1LDAsMTYwLjY1QzAsODEuNiw2MS4yLDIwLjQsMTQwLjI1LDIwLjRjNDMuMzUsMCw4Ni43LDIwLjQsMTE0Ljc1LDUzLjU1ICAgIEMyODMuMDUsNDAuOCwzMjYuNCwyMC40LDM2OS43NSwyMC40QzQ0OC44LDIwLjQsNTEwLDgxLjYsNTEwLDE2MC42NWMwLDk2LjktODYuNywxNzUuOTUtMjE5LjMsMjkzLjI1TDI1NSw0ODkuNnoiIGZpbGw9IiMwMDAwMDAiLz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />';
+
+    const fav = document.createElement('button');
+    fav.className = 'favorite';
+    fav.setAttribute('aria-label', 'favorite');
+    if (isFavorite === "true") {
+      
+      fav.classList.add('active');
+      fav.setAttribute('aria-pressed', 'true');
+    //   fav.innerHTML = isFavoriteSrc;
+      fav.innerHTML = `<p>Favorite: ${restaurant.is_favorite}</p>`
+      fav.title = `Remove ${restaurant.name} as a favorite`;
+    } else {
+      console.log('i should be black', restaurant.name)
+      fav.setAttribute('aria-pressed', 'false');
+    //   fav.innerHTML = notFavoriteSrc;
+      fav.innerHTML = `<p>Favorite: ${restaurant.is_favorite}</p>`
+      fav.title = `Add ${restaurant.name} as a favorite`;
+    }
+    fav.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (fav.classList.contains('active')) {
+        fav.setAttribute('aria-pressed', 'false');
+        // fav.innerHTML = notFavoriteSrc
+        fav.innerHTML = `<p>Favorite: false</p>`
+        fav.title = `Add ${restaurant.name} as a favorite`;
+        DBHelper.restaurantNotFavorite(restaurant.id);
+      } else {
+        fav.setAttribute('aria-pressed', 'true');
+        // fav.innerHTML = isFavoriteSrc;
+        fav.innerHTML = `<p>Favorite: true</p>`
+        fav.title = `Remove ${restaurant.name} as a favorite`;
+        DBHelper.restaurantIsFavorite(restaurant.id);
+      }
+      fav.classList.toggle('active');
+    });
+    li.append(fav);
+
+    return li;
 }
+
 
 /**
  * Add markers for current restaurants to the map.
@@ -186,13 +231,11 @@ addMarkersToMap = (restaurants = self.restaurants) => {
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js')
     .then(function(reg) {
-      // registration worked
-      console.log('Registration succeeded. Scope is ' + reg.scope);
+    // registration worked
+    console.log('Registration succeeded. Scope is ' + reg.scope);
     }).catch(function(error) {
-      // registration failed
-      console.log('Registration failed with ' + error);
+    // registration failed
+    console.log('Registration failed with ' + error);
     });
-  }
-
-
+}
 

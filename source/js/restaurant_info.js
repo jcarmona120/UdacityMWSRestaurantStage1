@@ -23,7 +23,7 @@ window.initMap = () => {
 /**
  * Get current restaurant from page URL.
  */
-fetchRestaurantFromURL = (callback) => {
+const fetchRestaurantFromURL = (callback) => {
   if (self.restaurant) { // restaurant already fetched!
     callback(null, self.restaurant)
     return;
@@ -48,7 +48,7 @@ fetchRestaurantFromURL = (callback) => {
 /**
  * Create restaurant HTML and add it to the webpage
  */
-fillRestaurantHTML = (restaurant = self.restaurant) => {
+const fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
 
@@ -69,13 +69,13 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     fillRestaurantHoursHTML();
   }
   // fill reviews
-  fillReviewsHTML();
+  DBHelper.fetchRestaurantReviews(restaurant.id, fillReviewsHTML)
 }
 
 /**
  * Create restaurant operating hours HTML table and add it to the webpage.
  */
-fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
+const fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
   const hours = document.getElementById('restaurant-hours');
   for (let key in operatingHours) {
     const row = document.createElement('tr');
@@ -95,11 +95,39 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 /**
  * Create all reviews HTML and add them to the webpage.
  */
-fillReviewsHTML = (reviews = self.restaurant.reviews) => {
+const fillReviewsHTML = (err, reviews) => {
+  self.restaurant.reviews = reviews;
+  console.log(self.restaurant.reviews)
   const container = document.getElementById('reviews-container');
+
+  const reviewHeader = document.createElement('div')
+  reviewHeader.className = "reviewHeader"
+  container.appendChild(reviewHeader);
+
   const title = document.createElement('h2');
   title.innerHTML = 'Reviews';
-  container.appendChild(title);
+  reviewHeader.appendChild(title)
+
+  const addReviewsButton = document.createElement('button')
+  addReviewsButton.className = "addReviewsButton"
+  addReviewsButton.innerHTML = 'Add a Review'
+  reviewHeader.appendChild(addReviewsButton)
+
+  const reviewsModal = document.getElementById('addReviewModal')
+  const opaqueContent = document.getElementById('maincontent')
+
+  addReviewsButton.addEventListener('click', (event) => {
+    reviewsModal.style.display = 'block';
+    opaqueContent.style.opacity = '.3'
+  })
+
+  const cancelReview = document.getElementById('cancelReview')
+
+  cancelReview.addEventListener('click', (event) => {
+    event.preventDefault();
+    reviewsModal.style.display = 'none';
+    opaqueContent.style.opacity = '1';
+  })
 
   if (!reviews) {
     const noReviews = document.createElement('p');
@@ -114,6 +142,64 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   container.appendChild(ul);
 }
 
+const submitButton = document.getElementById('submitReview')
+
+submitButton.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  const name = document.getElementById('name').value;
+  const rating = document.getElementById('rating').value;
+  const comments = document.getElementById('comments').value;
+
+  //close modal
+  // reviewsModal.style.display = 'none';
+  // opaqueContent.style.opacity = '1';
+  
+
+  //register Background Sync
+
+
+  if ('serviceWorker' in navigator && 'SyncManager' in window) {
+    navigator.serviceWorker.ready
+      .then(sw => {
+        var review = {
+          name,
+          rating,
+          comments
+        }
+        var worker = new Worker('./worker.js')
+        navigator.serviceWorker.controller.postMessage({
+          review,
+          store: 'reviews-sync-store',
+          command: 'sendReview'
+        })
+        worker.postMessage({
+          review,
+          store: 'reviews-sync-store',
+          command: 'sendReview'
+        })
+        worker.onmessage = result => {
+            console.log('syncing')
+            return sw.sync.register('send-review');
+        }
+      })
+  }
+
+
+
+  DBHelper.sendRestaurantReview(self.restaurant.id, name, rating, comments,
+    (error, review) => {
+    if (error) {
+      console.log('Error saving review');
+    } else {
+      // do some other stuff
+      console.log(review);
+      console.log(name, rating, comments)
+      window.location.href = `/restaurant.html?id=${self.restaurant.id}`;
+    }
+  });
+})
+
 /**
  * Create review HTML and add it to the webpage.
  */
@@ -121,6 +207,7 @@ createReviewHTML = (review) => {
   const li = document.createElement('li');
   const headingDiv = document.createElement('div');
   li.appendChild(headingDiv)
+
   const name = document.createElement('p');
   name.innerHTML = `Author: ${review.name}`;
   name.className = 'review-name';
@@ -128,7 +215,10 @@ createReviewHTML = (review) => {
   headingDiv.appendChild(name);
   
   const date = document.createElement('p');
-  date.innerHTML = `Date: ${review.date}`;
+  reviewDate = new Date(review.createdAt);
+  console.log(reviewDate)
+  displayDate = `${reviewDate.getDay()}/${reviewDate.getDate()}/${reviewDate.getFullYear()}`;
+  date.innerHTML = `Date: ${displayDate}`;
   date.className = 'review-date';
   headingDiv.appendChild(date);
 
@@ -174,3 +264,15 @@ getParameterByName = (name, url) => {
     return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js')
+  .then(function(reg) {
+    // registration worked
+    console.log('Registration succeeded. Scope is ' + reg.scope);
+  }).catch(function(error) {
+    // registration failed
+    console.log('Registration failed with ' + error);
+  });
+}
+

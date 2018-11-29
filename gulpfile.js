@@ -4,21 +4,20 @@ const autoprefixer = require('gulp-autoprefixer');
 const inlineSource = require('gulp-inline-source')
 
 const imagemin = require('gulp-imagemin')
-const imageminPngquant = require('imagemin-pngquant');
 const imageResize = require('gulp-image-resize')
 const responsive = require('gulp-responsive')
 
 const size = require('gulp-size')
 const terser = require('gulp-terser')
 const concat = require('gulp-concat');
-const babel = require('gulp-babel');
 const eslint = require('gulp-eslint');
 
 var browserSync = require('browser-sync').create();
 
-
-gulp.task['body', []]
 gulp.task('js', ['main_js', 'restaurant_js', 'sw', 'idb']);
+
+gulp.task('js-inject', ['js', 'copy-html'])
+gulp.task('body', ['styles', 'js', 'copy-html']);
 
 gulp.task('styles', () => {
     return gulp.src('./source/css/*.css')
@@ -81,7 +80,7 @@ gulp.task('sw', () => {
 });
 
 gulp.task('idb', () => {
-    return gulp.src(['idb.js'])
+    return gulp.src('idb-utility.js')
         .pipe(terser())
         .pipe(size({title: 'idb'}))
         .pipe(gulp.dest('dist'))
@@ -89,13 +88,13 @@ gulp.task('idb', () => {
 
 
 
-gulp.task('browserSync', function() {
-    browserSync.init({
-      server: {
-        baseDir: 'dist'
-      },
-    });
-});
+// gulp.task('browserSync', function() {
+//     browserSync.init({
+//       server: {
+//         baseDir: 'dist'
+//       },
+//     });
+// });
 
 
 
