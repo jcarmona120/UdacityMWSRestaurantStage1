@@ -170,43 +170,32 @@ class DBHelper {
       return marker;
     }
   
-    static restaurantIsFavorite(restaurantId) {
+    static restaurantIsFavorite(restaurantId, is_favorite) {
       fetch(`http://localhost:1337/restaurants/${restaurantId}/?is_favorite=true`, {
         method: 'PUT'
       }).then(() => {
         console.log('its your favorite')
-        var worker = new Worker('./worker.js')
-        worker.postMessage({
-          isFavorite: true,
-          restaurantId,
-          store: 'id',
-          command: 'isFavorite'
-        })
-        worker.onmessage = result => {
-            console.log(result)
-        }
       })
     }
     
-    static restaurantNotFavorite(restaurantId) {
+    static restaurantNotFavorite(restaurantId, is_favorite) {
       fetch(`http://localhost:1337/restaurants/${restaurantId}/?is_favorite=false`, {
         method: 'PUT'
       }).then(() => {
         console.log('not your favorite')
-        var worker = new Worker('./worker.js')
-        worker.postMessage({
-          isFavorite: false,
-          restaurantId,
-          store: 'id',
-          command: 'isFavorite'
-        })
-        worker.onmessage = result => {
-            console.log(result)
-        }
       })
     }
   
     static fetchRestaurantReviews(id, callback) {
+        // var worker = new Worker('../worker.js')
+        // worker.postMessage({
+        //   url: `http://localhost:1337/reviews/?restaurant_id=${id}`,
+        //   store: 'reviews'
+        // })
+        // worker.onmessage = result => {
+        //     var reviews = result.data
+        //     return callback(null, reviews)
+        // }
         fetch(`http://localhost:1337/reviews/?restaurant_id=${id}`)
           .then(response => {
                   return response.json()

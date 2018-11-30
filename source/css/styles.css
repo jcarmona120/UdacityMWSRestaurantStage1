@@ -2,6 +2,8 @@
 
 /* CSS Document */
 
+
+
 body,
 td,
 th,
@@ -45,9 +47,7 @@ a img {
     border: none 0px #fff;
 }
 
-img:not([src]) {
-    visibility: hidden;
-}
+
 
 /* Fixes Firefox anomaly during image load */
 @-moz-document url-prefix() {
@@ -291,12 +291,17 @@ nav h1 a {
     margin: 15px 0 0;
     padding: 8px 30px 10px;
     text-align: center;
-    text-decoration: none;
+		text-decoration: none;
     text-transform: uppercase;
 }
 
 #restaurant-info {
     padding-left: 1em;
+}
+
+.favorite {
+    border: 0;
+    outline: none;
 }
 
 
@@ -339,7 +344,7 @@ nav h1 a {
     line-height: 1.1;
 }
 
-#restaurant-img {
+.restaurant-img {
     width: 90%;
     border-radius: 15px 0 15px 0;
 }
@@ -423,6 +428,45 @@ nav h1 a {
     padding: 0 .4em;
     margin-bottom: 1em;
     border-radius: 15px 0px 0px 0;
+}
+
+.reviewHeader{ 
+    display: flex;
+    align-items: center;
+    width: 85%;
+    justify-content: space-between;
+}
+
+.reviewsHeader h2 {
+    height: 30px;
+}
+
+#addReviewModal {
+    display: none;
+    width: 50%;
+    background-color: rgba(192,192,192,.7);
+    height: 200px;
+    z-index: 99;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.reviewForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.reviewForm > input {
+    margin: 1.2em 1em;
+}
+
+.addReviewsButton {
+    width: 9em;
+    height: 3em;
+    background-color: orange;
+    font-size: 1.4em;
 }
 
 .review-name {

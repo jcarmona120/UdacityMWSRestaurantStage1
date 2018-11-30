@@ -1,105 +1,154 @@
-importScripts('./idb.js')
+importScripts('idb.js')
+importScripts('js/idb-utility.js');
+importScripts('js/dbhelper.js')
 
-const dbPromise = idb.open('udacity-mws-stage-2-jc', 1, upgradeDB => {
-  upgradeDB.createObjectStore('restaurants');
-});
-  
-  const idbKeyval = {
-    get(key) {
-      return dbPromise.then(db => {
-        return db.transaction('restaurants')
-          .objectStore('restaurants').get(key);
-      });
-    },
-    set(key, val) {
-      return dbPromise.then(db => {
-        const tx = db.transaction('restaurants', 'readwrite');
-        tx.objectStore('restaurants').put(val, key);
-        return tx.complete;
-      });
-    },
-    delete(key) {
-      return dbPromise.then(db => {
-        const tx = db.transaction('restaurants', 'readwrite');
-        tx.objectStore('restaurants').delete(key);
-        return tx.complete;
-      });
-    },
-    clear() {
-      return dbPromise.then(db => {
-        const tx = db.transaction('restaurants', 'readwrite');
-        tx.objectStore('restaurants').clear();
-        return tx.complete;
-      });
-    },
-    keys() {
-      return dbPromise.then(db => {
-        const tx = db.transaction('restaurants');
-        const keys = [];
-        const store = tx.objectStore('restaurants');
-  
-        // This would be store.getAllKeys(), but it isn't supported by Edge or Safari.
-        // openKeyCursor isn't supported by Safari, so we fall back
-        (store.iterateKeyCursor || store.iterateCursor).call(store, cursor => {
-          if (!cursor) return;
-          keys.push(cursor.key);
-          cursor.continue();
-        });
-  
-        return tx.complete.then(() => keys);
-      });
-    }
-  };
-
-  
-
-var CACHE_NAME = 'mws-stage-2';
+var static_cache = 'mws-static-v7';
+var dynamic_cache = 'mws-dynamic-v9';
 var serverURL = 'http://127.0.0.1:1337/restaurants'
-var urlsToCache = [
-    serverURL
-];
 
-self.addEventListener('install', function(e) {
- e.waitUntil(
-   caches.open(CACHE_NAME).then(function(cache) {
+var staticAssets = [
+  '/',
+  '/index.html',
+  '/restaurant.html',
+  '/js/idb.js',
+  '/js/main_bundle.js',
+  '/js/restaurant_bundle.js',
+  serverURL,
+  '/worker.js'
+]
+
+
+self.addEventListener('install', function(event) {
+  self.skipWaiting();
+ event.waitUntil(
+   caches.open(static_cache).then(function(cache) {
      console.log('opened cache')
-      
-     return cache.addAll([
-      '/',
-      './index.html',
-     './restaurant.html',
-     serverURL
-     ]);
+     return cache.addAll(
+      staticAssets
+     );
    })
  );
+ 
 });
 
 self.addEventListener('activate', function(event) {
-  console.log('[ServiceWorker] Activate');
-  fetch('http://127.0.0.1:1337/restaurants')
-  .then(response => {
-		return response.json()
-  }).then(data => {
-      console.log('we got data')
-      console.log(data)
-      idbKeyval.set('restaurants', data);
-  })
+  console.log('activated')
+  event.waitUntil(
+    caches.keys()
+      .then((keyList) => {
+        return Promise.all(keyList.map((key => {
+          if (key !== static_cache && key !== dynamic_cache) {
+            console.log('Removing old cache', key);
+            return caches.delete(key)
+          }
+        })))
+      })
+  )
+  return self.clients.claim();
 });
 
 self.addEventListener('fetch', function(event) {
+  const request = event.request;
+  const requestUrl = new URL(request.url)
 
-  //  monitor requests
-  //  const acceptHeader = event.request.headers.get('accept')
-  //  console.log("Fetching", acceptHeader, event.request.url)
+    if (requestUrl.port === "1337") {
+      if (request.url.includes('reviews') && request.method !== 'POST') {
+        var id = requestUrl.searchParams.get('restaurant_id')
+        event.respondWith(
+          readByIndex('reviews', id)
+            .then(reviews => {
+              // check for reviews in IndexedDB
+              if (reviews.length) {
+                console.log('from idb')
+                return reviews;
+              }
+              //fetch request normally and write to IndexedDB
+              return fetch(request) 
+                .then(response => response.json())
+                .then(reviews => {
+                  reviews.forEach(review => {
+                    writeData('reviews', review)
+                  })
+                  return reviews;
+                })
+            })
+            // return response from fetch
+            .then(response => new Response(JSON.stringify(response)))
+        )
+      } else {
+        event.respondWith(
+          // get restaurants data from IndexedDB first
+          readAllData('restaurants')
+          .then(restaurants => {
+            if (restaurants.length) {
+              return restaurants;
+            }
+            // else get from network and save to IndexedDB
+            return fetch(request) 
+              .then(response => response.json())
+              .then(restaurantsData => {
+                restaurantsData.forEach(restaurant => {
+                  writeData('restaurants', restaurant);
+                });
+                return restaurantsData;
+              });  
+          })
+          //send response to client
+          .then(response => new Response(JSON.stringify(response)))
+        );
+      }
+    } else {
+      event.respondWith(
+        //match from caches
+        caches.match(request)
+          .then(response => {
+            if (response) {
+              return response;
+            } else {
+              //fetch and put all responses into dynamic cache
+              return fetch(request)
+                .then(res => {
+                  return caches.open(dynamic_cache)
+                    .then(cache => {
+                      cache.put(request.url, res.clone())
+                      return res;
+                    });
+                });
+            }
+          })
+      );
+    }
+  });
 
-  event.respondWith(
-    caches.match(event.request).then(function(resp) {
-      return resp || fetch(event.request).then(function(response) {
-        return caches.open(CACHE_NAME).then(function(cache) {
-          cache.put(event.request, response.clone());
-          return response;
-        });  
-      });
-    })
-  );
-});
+// self.addEventListener('message', (event) => {
+//   console.log('Message received:', event)
+  // writeData(event.data.store, event.data.review)
+  // client.postMessage('hello')
+// })
+
+
+//Background Sync Offline Reviews
+self.addEventListener('sync', (event) => {
+  console.log('Service Worker Syncing');
+  if (event.tag === 'send-review') {
+    console.log('syncing send-review')
+    readAllData('reviews-sync-store')
+      .then(data => {
+        var storedReviews = data;
+        storedReviews.forEach(review => {
+          DBHelper.sendRestaurantReview(review.id, review.name, review.rating, review.comments,
+            (error, review) => {
+            if (error) {
+              console.log('Error saving review');
+            } else {
+              // do some other stuff
+              window.location.href = `/restaurant.html?id=${self.restaurant.id}`;
+            }
+          });
+        })
+
+      })
+
+  }
+})
+

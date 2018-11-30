@@ -1,4 +1,4 @@
-
+importScripts('.js/idb.js')
 
 self.onmessage = function(e) {
     var databaseURL = e.data
