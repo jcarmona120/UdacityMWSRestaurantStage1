@@ -21,7 +21,7 @@
           "Sunday": "12:00 pm - 4:00 pm, 5:30 pm - 11:00 pm"
         },
         "createdAt": 1504095563444,
-        "updatedAt": "2018-11-28T21:54:37.759Z",
+        "updatedAt": "2018-11-30T01:43:38.711Z",
         "id": 1,
         "is_favorite": "true"
       },
@@ -93,7 +93,7 @@
           "Sunday": "Sat - 10:30 pm"
         },
         "createdAt": 1504095567091,
-        "updatedAt": "2018-11-28T18:07:29.670Z",
+        "updatedAt": "2018-11-30T01:43:40.064Z",
         "is_favorite": "true",
         "id": 4
       },
@@ -117,8 +117,8 @@
           "Sunday": "10:00 am - 12:00 am"
         },
         "createdAt": 1504095567071,
-        "updatedAt": "2018-11-27T18:09:44.452Z",
-        "is_favorite": "false",
+        "updatedAt": "2018-11-30T01:43:41.503Z",
+        "is_favorite": "true",
         "id": 5
       },
       {
@@ -754,6 +754,87 @@
         "createdAt": "2018-11-29T17:58:54.404Z",
         "updatedAt": "2018-11-29T17:58:54.404Z",
         "id": 57
+      },
+      {
+        "restaurant_id": 2,
+        "name": "Jawann",
+        "rating": "5",
+        "comments": "I really don't like this.",
+        "createdAt": "2018-11-29T19:47:04.147Z",
+        "updatedAt": "2018-11-29T19:47:04.147Z",
+        "id": 58
+      },
+      {
+        "restaurant_id": 2,
+        "name": "Jawann",
+        "rating": "5",
+        "comments": "I really don't like this.",
+        "createdAt": "2018-11-29T19:47:47.994Z",
+        "updatedAt": "2018-11-29T19:47:47.994Z",
+        "id": 59
+      },
+      {
+        "restaurant_id": 2,
+        "name": "Jawann",
+        "rating": "5",
+        "comments": "I really don't like this.",
+        "createdAt": "2018-11-29T19:47:47.996Z",
+        "updatedAt": "2018-11-29T19:47:47.996Z",
+        "id": 60
+      },
+      {
+        "restaurant_id": 2,
+        "name": "Jawann",
+        "rating": "4",
+        "comments": "I really don't like this.",
+        "createdAt": "2018-11-29T19:47:47.998Z",
+        "updatedAt": "2018-11-29T19:47:47.998Z",
+        "id": 61
+      },
+      {
+        "restaurant_id": 2,
+        "name": "Jawann",
+        "rating": "3",
+        "comments": "I really don't like this.",
+        "createdAt": "2018-11-29T19:47:48.001Z",
+        "updatedAt": "2018-11-29T19:47:48.001Z",
+        "id": 62
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Jawann",
+        "rating": "5",
+        "comments": "I forgot to say i really like this. ",
+        "createdAt": "2018-11-29T20:44:38.412Z",
+        "updatedAt": "2018-11-29T20:44:38.412Z",
+        "id": 63
+      },
+      {
+        "restaurant_id": 4,
+        "name": "Jawann",
+        "rating": "5",
+        "comments": "I did this. ",
+        "createdAt": "2018-11-29T20:44:38.420Z",
+        "updatedAt": "2018-11-29T20:44:38.420Z",
+        "id": 64
+      },
+      {
+        "restaurant_id": 1,
+        "name": "Jawann",
+        "rating": "1000",
+        "comments": "Love this thing. ",
+        "createdAt": "2018-11-30T02:18:13.776Z",
+        "updatedAt": "2018-11-30T02:18:13.776Z",
+        "id": 65
+      },
+      {
+        "restaurant_id": 6,
+        "name": "Jawann",
+        "rating": "5",
+        "comments": "I really don't like this.",
+        "createdAt": "2018-11-30T03:13:18.073Z",
+        "updatedAt": "2018-11-30T03:13:18.073Z",
+        "id": 66
       }
     ]
   },
@@ -809,7 +890,7 @@
       "id": 10
     },
     "reviews": {
-      "id": 57
+      "id": 66
     }
   }
 }

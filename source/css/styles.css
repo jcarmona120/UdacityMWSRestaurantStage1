@@ -291,7 +291,7 @@ nav h1 a {
     margin: 15px 0 0;
     padding: 8px 30px 10px;
     text-align: center;
-    text-decoration: none;
+		text-decoration: none;
     text-transform: uppercase;
 }
 
@@ -300,8 +300,8 @@ nav h1 a {
 }
 
 .favorite {
-border: 0;
-outline: none;
+    border: 0;
+    outline: none;
 }
 
 
@@ -443,13 +443,14 @@ outline: none;
 
 #addReviewModal {
     display: none;
-    width: 400px;
-    position: fixed;
-    background-color: rgba(192,192,192,0.7);
+    width: 50%;
+    background-color: rgba(192,192,192,.7);
     height: 200px;
-    left: 30vw;
-    top: 20vw;
     z-index: 99;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .reviewForm {

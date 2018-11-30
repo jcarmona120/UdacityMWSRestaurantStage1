@@ -97,7 +97,6 @@ const fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hour
  */
 const fillReviewsHTML = (err, reviews) => {
   self.restaurant.reviews = reviews;
-  console.log(self.restaurant.reviews)
   const container = document.getElementById('reviews-container');
 
   const reviewHeader = document.createElement('div')
@@ -151,6 +150,20 @@ submitButton.addEventListener('click', (event) => {
   const rating = document.getElementById('rating').value;
   const comments = document.getElementById('comments').value;
 
+ 
+  var date = new Date(Date.now())
+  var parsedDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
+
+
+
+  var review = {
+    name,
+    rating,
+    comments,
+    id: self.restaurant.id,
+    createdAt: parsedDate
+  }
+
   //close modal
   // reviewsModal.style.display = 'none';
   // opaqueContent.style.opacity = '1';
@@ -158,21 +171,10 @@ submitButton.addEventListener('click', (event) => {
 
   //register Background Sync
 
-
   if ('serviceWorker' in navigator && 'SyncManager' in window) {
     navigator.serviceWorker.ready
       .then(sw => {
-        var review = {
-          name,
-          rating,
-          comments
-        }
         var worker = new Worker('./worker.js')
-        navigator.serviceWorker.controller.postMessage({
-          review,
-          store: 'reviews-sync-store',
-          command: 'sendReview'
-        })
         worker.postMessage({
           review,
           store: 'reviews-sync-store',
@@ -185,19 +187,9 @@ submitButton.addEventListener('click', (event) => {
       })
   }
 
+  const ul = document.getElementById('reviews-list');
+  ul.appendChild(createReviewHTML(review));
 
-
-  DBHelper.sendRestaurantReview(self.restaurant.id, name, rating, comments,
-    (error, review) => {
-    if (error) {
-      console.log('Error saving review');
-    } else {
-      // do some other stuff
-      console.log(review);
-      console.log(name, rating, comments)
-      window.location.href = `/restaurant.html?id=${self.restaurant.id}`;
-    }
-  });
 })
 
 /**
@@ -216,7 +208,6 @@ createReviewHTML = (review) => {
   
   const date = document.createElement('p');
   reviewDate = new Date(review.createdAt);
-  console.log(reviewDate)
   displayDate = `${reviewDate.getDay()}/${reviewDate.getDate()}/${reviewDate.getFullYear()}`;
   date.innerHTML = `Date: ${displayDate}`;
   date.className = 'review-date';
