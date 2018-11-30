@@ -181,7 +181,7 @@ submitButton.addEventListener('click', (event) => {
           command: 'sendReview'
         })
         worker.onmessage = result => {
-            console.log('syncing')
+            console.log(result)
             return sw.sync.register('send-review');
         }
       })
