@@ -528,6 +528,33 @@
         "createdAt": "2018-11-30T18:09:46.631Z",
         "updatedAt": "2018-11-30T18:09:46.631Z",
         "id": 32
+      },
+      {
+        "restaurant_id": 1,
+        "name": "Jawann",
+        "rating": "5",
+        "comments": "I really don't like this.",
+        "createdAt": "2018-11-30T19:27:02.602Z",
+        "updatedAt": "2018-11-30T19:27:02.602Z",
+        "id": 33
+      },
+      {
+        "restaurant_id": 1,
+        "name": "Jawann",
+        "rating": "5",
+        "comments": "I really don't like this.",
+        "createdAt": "2018-11-30T19:27:47.743Z",
+        "updatedAt": "2018-11-30T19:27:47.743Z",
+        "id": 34
+      },
+      {
+        "restaurant_id": 1,
+        "name": "Jawann",
+        "rating": "3",
+        "comments": "come on though",
+        "createdAt": "2018-11-30T19:27:47.753Z",
+        "updatedAt": "2018-11-30T19:27:47.753Z",
+        "id": 35
       }
     ]
   },
@@ -583,7 +610,7 @@
       "id": 10
     },
     "reviews": {
-      "id": 32
+      "id": 35
     }
   }
 }
