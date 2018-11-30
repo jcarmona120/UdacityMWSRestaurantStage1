@@ -2,6 +2,8 @@ importScripts('idb.js')
 importScripts('js/idb-utility.js');
 importScripts('js/dbhelper.js')
 
+idb.open('extra-db')
+
 var static_cache = 'mws-static-v7';
 var dynamic_cache = 'mws-dynamic-v9';
 var serverURL = 'http://127.0.0.1:1337/restaurants'
@@ -142,6 +144,7 @@ self.addEventListener('sync', (event) => {
               console.log('Error saving review');
             } else {
               // do some other stuff
+              console.log('we added a review to the server')
               window.location.href = `/restaurant.html?id=${self.restaurant.id}`;
             }
           });
