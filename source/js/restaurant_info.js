@@ -154,8 +154,6 @@ submitButton.addEventListener('click', (event) => {
   var date = new Date(Date.now())
   var parsedDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
 
-
-
   var review = {
     name,
     rating,
@@ -188,8 +186,7 @@ submitButton.addEventListener('click', (event) => {
   }
 
   const ul = document.getElementById('reviews-list');
-  ul.appendChild(createReviewHTML(review));
-
+    ul.appendChild(createReviewHTML(review));
 })
 
 /**

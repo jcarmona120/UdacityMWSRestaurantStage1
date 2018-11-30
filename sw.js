@@ -141,7 +141,7 @@ self.addEventListener('sync', (event) => {
             if (error) {
               console.log('Error saving review');
             } else {
-              // do some other stuff
+              console.log(review);
               window.location.href = `/restaurant.html?id=${self.restaurant.id}`;
             }
           });
