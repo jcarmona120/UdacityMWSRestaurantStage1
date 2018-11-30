@@ -1,2 +1,2 @@
-.gitignore
 /node_modules
+stage3server/node_modules/
