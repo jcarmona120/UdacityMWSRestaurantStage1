@@ -21,7 +21,7 @@
           "Sunday": "12:00 pm - 4:00 pm, 5:30 pm - 11:00 pm"
         },
         "createdAt": 1504095563444,
-        "updatedAt": "2018-11-30T01:43:38.711Z",
+        "updatedAt": "2018-11-30T19:43:09.202Z",
         "id": 1,
         "is_favorite": "true"
       },
@@ -45,8 +45,8 @@
           "Sunday": "12:00 pm - 3:00 pm, 5:00 pm - 11:00 pm"
         },
         "createdAt": 1504095568414,
-        "updatedAt": "2018-11-28T18:18:12.535Z",
-        "is_favorite": "false",
+        "updatedAt": "2018-11-30T19:43:10.768Z",
+        "is_favorite": "true",
         "id": 2
       },
       {
@@ -69,9 +69,8 @@
           "Sunday": "11:30 am - 2:00 am"
         },
         "createdAt": 1504095571434,
-        "updatedAt": "2018-11-28T19:07:41.549Z",
-        "id": 3,
-        "is_favorite": "false"
+        "updatedAt": 1504095571434,
+        "id": 3
       },
       {
         "name": "Katz's Delicatessen",
@@ -93,8 +92,8 @@
           "Sunday": "Sat - 10:30 pm"
         },
         "createdAt": 1504095567091,
-        "updatedAt": "2018-11-30T01:43:40.064Z",
-        "is_favorite": "true",
+        "updatedAt": 1504095567091,
+        "is_favorite": false,
         "id": 4
       },
       {
@@ -117,8 +116,8 @@
           "Sunday": "10:00 am - 12:00 am"
         },
         "createdAt": 1504095567071,
-        "updatedAt": "2018-11-30T01:43:41.503Z",
-        "is_favorite": "true",
+        "updatedAt": 1504095567071,
+        "is_favorite": false,
         "id": 5
       },
       {
@@ -141,8 +140,8 @@
           "Sunday": "12:00 pm - 9:00 pm"
         },
         "createdAt": 1504095567071,
-        "updatedAt": "2018-11-27T18:09:45.586Z",
-        "is_favorite": "false",
+        "updatedAt": 1504095567071,
+        "is_favorite": false,
         "id": 6
       },
       {
@@ -165,8 +164,8 @@
           "Sunday": "11:30 am - 10:00 pm"
         },
         "createdAt": 1504095567091,
-        "updatedAt": "2018-11-14T03:45:12.033Z",
-        "is_favorite": "false",
+        "updatedAt": 1504095567091,
+        "is_favorite": false,
         "id": 7
       },
       {
@@ -189,8 +188,8 @@
           "Sunday": "10:00 am - 3:00 pm, 5:30 pm - 11:00 pm"
         },
         "createdAt": 1504095567091,
-        "updatedAt": "2018-11-14T03:45:12.962Z",
-        "is_favorite": "false",
+        "updatedAt": 1504095567091,
+        "is_favorite": false,
         "id": 8
       },
       {
@@ -213,8 +212,8 @@
           "Sunday": "5:00 pm - 10:00 pm"
         },
         "createdAt": 1504095567191,
-        "updatedAt": "2018-11-28T18:17:02.836Z",
-        "is_favorite": "false",
+        "updatedAt": 1504095567191,
+        "is_favorite": false,
         "id": 9
       },
       {
@@ -236,8 +235,8 @@
           "Sunday": "11:00 am - 12:00 am"
         },
         "createdAt": 1504095567183,
-        "updatedAt": "2018-11-14T03:45:14.972Z",
-        "is_favorite": "false",
+        "updatedAt": 1504095567183,
+        "is_favorite": false,
         "id": 10
       }
     ],
@@ -511,330 +510,6 @@
         "updatedAt": 1504095567183,
         "rating": 4,
         "comments": "For a Michelin star restaurant, it's fairly priced and the food is fairly good. Started with a strawberry margarita which was good in flavor but not much alcohol. Had the chicken enchiladas with salsa verde and it was really good. Great balance in flavor and a good portion. Extra tasty with their hot sauces. My wife had the lamb but it was a bit too salty for our taste. Although, it was cooked very well and fell off the bone. The highlight of the night was the tres leches cake. Probably the best I've ever had to be honest. Not too sweet and very milky. Overall, one of my top 3 favorite Mexican in NY."
-      },
-      {
-        "restaurant_id": "3",
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "I really enjoyed this",
-        "createdAt": "2018-11-13T00:08:42.712Z",
-        "updatedAt": "2018-11-13T00:08:42.712Z",
-        "id": 31
-      },
-      {
-        "restaurant_id": "3",
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "I really enjoyed this",
-        "createdAt": "2018-11-13T00:12:37.934Z",
-        "updatedAt": "2018-11-13T00:12:37.934Z",
-        "id": 32
-      },
-      {
-        "restaurant_id": 3,
-        "name": {},
-        "rating": {},
-        "comments": {},
-        "createdAt": "2018-11-13T06:34:49.409Z",
-        "updatedAt": "2018-11-13T06:34:49.409Z",
-        "id": 33
-      },
-      {
-        "restaurant_id": 3,
-        "name": "",
-        "rating": "",
-        "comments": "",
-        "createdAt": "2018-11-13T06:36:28.011Z",
-        "updatedAt": "2018-11-13T06:36:28.011Z",
-        "id": 34
-      },
-      {
-        "restaurant_id": 3,
-        "name": "",
-        "rating": "",
-        "comments": "",
-        "createdAt": "2018-11-13T06:37:10.391Z",
-        "updatedAt": "2018-11-13T06:37:10.391Z",
-        "id": 35
-      },
-      {
-        "restaurant_id": 3,
-        "name": "",
-        "rating": "",
-        "comments": "",
-        "createdAt": "2018-11-13T06:39:09.816Z",
-        "updatedAt": "2018-11-13T06:39:09.816Z",
-        "id": 36
-      },
-      {
-        "restaurant_id": 3,
-        "name": "",
-        "rating": "",
-        "comments": "",
-        "createdAt": "2018-11-13T06:41:05.383Z",
-        "updatedAt": "2018-11-13T06:41:05.383Z",
-        "id": 37
-      },
-      {
-        "restaurant_id": 3,
-        "name": "",
-        "rating": "",
-        "comments": "",
-        "createdAt": "2018-11-13T06:50:47.217Z",
-        "updatedAt": "2018-11-13T06:50:47.217Z",
-        "id": 38
-      },
-      {
-        "restaurant_id": 3,
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "I really don't like this.",
-        "createdAt": "2018-11-13T06:52:33.532Z",
-        "updatedAt": "2018-11-13T06:52:33.532Z",
-        "id": 39
-      },
-      {
-        "restaurant_id": 3,
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "This is actually working.",
-        "createdAt": "2018-11-13T16:23:47.456Z",
-        "updatedAt": "2018-11-13T16:23:47.456Z",
-        "id": 40
-      },
-      {
-        "restaurant_id": 1,
-        "name": "Jawann",
-        "rating": "1",
-        "comments": "You can't get in this place. So busy. Need reservations.",
-        "createdAt": "2018-11-13T16:24:49.008Z",
-        "updatedAt": "2018-11-13T16:24:49.008Z",
-        "id": 41
-      },
-      {
-        "restaurant_id": 1,
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "I really don't like this.",
-        "createdAt": "2018-11-13T16:25:21.710Z",
-        "updatedAt": "2018-11-13T16:25:21.710Z",
-        "id": 42
-      },
-      {
-        "restaurant_id": 1,
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "hello?",
-        "createdAt": "2018-11-27T17:57:59.135Z",
-        "updatedAt": "2018-11-27T17:57:59.135Z",
-        "id": 43
-      },
-      {
-        "restaurant_id": 1,
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "hello?",
-        "createdAt": "2018-11-27T17:58:03.463Z",
-        "updatedAt": "2018-11-27T17:58:03.463Z",
-        "id": 44
-      },
-      {
-        "restaurant_id": 1,
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "hello?",
-        "createdAt": "2018-11-27T17:58:03.654Z",
-        "updatedAt": "2018-11-27T17:58:03.654Z",
-        "id": 45
-      },
-      {
-        "restaurant_id": 1,
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "hello?",
-        "createdAt": "2018-11-27T17:58:03.846Z",
-        "updatedAt": "2018-11-27T17:58:03.846Z",
-        "id": 46
-      },
-      {
-        "restaurant_id": 8,
-        "name": "James",
-        "rating": "3",
-        "comments": "Dutch? ",
-        "createdAt": "2018-11-27T20:03:52.814Z",
-        "updatedAt": "2018-11-27T20:03:52.814Z",
-        "id": 47
-      },
-      {
-        "restaurant_id": 1,
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "hello",
-        "createdAt": "2018-11-29T17:49:57.198Z",
-        "updatedAt": "2018-11-29T17:49:57.198Z",
-        "id": 48
-      },
-      {
-        "restaurant_id": 1,
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "hello",
-        "createdAt": "2018-11-29T17:50:00.203Z",
-        "updatedAt": "2018-11-29T17:50:00.203Z",
-        "id": 49
-      },
-      {
-        "restaurant_id": 2,
-        "name": "Jawann",
-        "rating": "why",
-        "comments": "stop now",
-        "createdAt": "2018-11-29T17:56:39.097Z",
-        "updatedAt": "2018-11-29T17:56:39.097Z",
-        "id": 50
-      },
-      {
-        "restaurant_id": 2,
-        "name": "Jawann",
-        "rating": "why",
-        "comments": "stop now",
-        "createdAt": "2018-11-29T17:58:29.306Z",
-        "updatedAt": "2018-11-29T17:58:29.306Z",
-        "id": 51
-      },
-      {
-        "restaurant_id": 2,
-        "name": "Jawann",
-        "rating": "why",
-        "comments": "stop now",
-        "createdAt": "2018-11-29T17:58:31.529Z",
-        "updatedAt": "2018-11-29T17:58:31.529Z",
-        "id": 52
-      },
-      {
-        "restaurant_id": 2,
-        "name": "Jawann",
-        "rating": "why",
-        "comments": "stop now",
-        "createdAt": "2018-11-29T17:58:32.780Z",
-        "updatedAt": "2018-11-29T17:58:32.780Z",
-        "id": 53
-      },
-      {
-        "restaurant_id": 2,
-        "name": "Jawann",
-        "rating": "why",
-        "comments": "stop now",
-        "createdAt": "2018-11-29T17:58:33.564Z",
-        "updatedAt": "2018-11-29T17:58:33.564Z",
-        "id": 54
-      },
-      {
-        "restaurant_id": 2,
-        "name": "Jawann",
-        "rating": "why",
-        "comments": "stop now",
-        "createdAt": "2018-11-29T17:58:33.880Z",
-        "updatedAt": "2018-11-29T17:58:33.880Z",
-        "id": 55
-      },
-      {
-        "restaurant_id": 2,
-        "name": "Jawann",
-        "rating": "why",
-        "comments": "stop now",
-        "createdAt": "2018-11-29T17:58:34.153Z",
-        "updatedAt": "2018-11-29T17:58:34.153Z",
-        "id": 56
-      },
-      {
-        "restaurant_id": 2,
-        "name": "Jawann",
-        "rating": "right",
-        "comments": "what",
-        "createdAt": "2018-11-29T17:58:54.404Z",
-        "updatedAt": "2018-11-29T17:58:54.404Z",
-        "id": 57
-      },
-      {
-        "restaurant_id": 2,
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "I really don't like this.",
-        "createdAt": "2018-11-29T19:47:04.147Z",
-        "updatedAt": "2018-11-29T19:47:04.147Z",
-        "id": 58
-      },
-      {
-        "restaurant_id": 2,
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "I really don't like this.",
-        "createdAt": "2018-11-29T19:47:47.994Z",
-        "updatedAt": "2018-11-29T19:47:47.994Z",
-        "id": 59
-      },
-      {
-        "restaurant_id": 2,
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "I really don't like this.",
-        "createdAt": "2018-11-29T19:47:47.996Z",
-        "updatedAt": "2018-11-29T19:47:47.996Z",
-        "id": 60
-      },
-      {
-        "restaurant_id": 2,
-        "name": "Jawann",
-        "rating": "4",
-        "comments": "I really don't like this.",
-        "createdAt": "2018-11-29T19:47:47.998Z",
-        "updatedAt": "2018-11-29T19:47:47.998Z",
-        "id": 61
-      },
-      {
-        "restaurant_id": 2,
-        "name": "Jawann",
-        "rating": "3",
-        "comments": "I really don't like this.",
-        "createdAt": "2018-11-29T19:47:48.001Z",
-        "updatedAt": "2018-11-29T19:47:48.001Z",
-        "id": 62
-      },
-      {
-        "restaurant_id": 4,
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "I forgot to say i really like this. ",
-        "createdAt": "2018-11-29T20:44:38.412Z",
-        "updatedAt": "2018-11-29T20:44:38.412Z",
-        "id": 63
-      },
-      {
-        "restaurant_id": 4,
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "I did this. ",
-        "createdAt": "2018-11-29T20:44:38.420Z",
-        "updatedAt": "2018-11-29T20:44:38.420Z",
-        "id": 64
-      },
-      {
-        "restaurant_id": 1,
-        "name": "Jawann",
-        "rating": "1000",
-        "comments": "Love this thing. ",
-        "createdAt": "2018-11-30T02:18:13.776Z",
-        "updatedAt": "2018-11-30T02:18:13.776Z",
-        "id": 65
-      },
-      {
-        "restaurant_id": 6,
-        "name": "Jawann",
-        "rating": "5",
-        "comments": "I really don't like this.",
-        "createdAt": "2018-11-30T03:13:18.073Z",
-        "updatedAt": "2018-11-30T03:13:18.073Z",
-        "id": 66
       }
     ]
   },
@@ -890,7 +565,7 @@
       "id": 10
     },
     "reviews": {
-      "id": 66
+      "id": 30
     }
   }
 }

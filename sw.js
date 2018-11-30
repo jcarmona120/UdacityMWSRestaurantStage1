@@ -11,6 +11,8 @@ var staticAssets = [
   '/index.html',
   '/restaurant.html',
   '/idb.js',
+  'js/idb.js',
+  'js/dbhelper.js',
   '/js/main_bundle.js',
   '/js/restaurant_bundle.js',
   serverURL,
