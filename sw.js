@@ -10,7 +10,7 @@ var staticAssets = [
   '/',
   '/index.html',
   '/restaurant.html',
-  '/js/idb.js',
+  '/idb.js',
   '/js/main_bundle.js',
   '/js/restaurant_bundle.js',
   serverURL,
@@ -52,7 +52,7 @@ self.addEventListener('fetch', function(event) {
   const requestUrl = new URL(request.url)
 
     if (requestUrl.port === "1337") {
-      if (request.url.includes('reviews') && request.method !== 'POST') {
+      if (request.url.includes('reviews')) {
         var id = requestUrl.searchParams.get('restaurant_id')
         event.respondWith(
           readByIndex('reviews', id)
