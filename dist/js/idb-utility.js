@@ -36,3 +36,13 @@ var dbPromise = idb.open('restaurant-store', 3, upgradeDB => {
         .getAll(key);
     });
   }
+
+  function clearAllData(st) {
+    return dbPromise
+      .then(function(db) {
+        var tx = db.transaction(st, 'readwrite');
+        var store = tx.objectStore(st);
+        store.clear();
+        return tx.complete;
+      });
+  }
