@@ -2,8 +2,6 @@ importScripts('idb.js')
 importScripts('js/idb-utility.js');
 importScripts('js/dbhelper.js')
 
-idb.open('extra-db')
-
 var static_cache = 'mws-static-v7';
 var dynamic_cache = 'mws-dynamic-v9';
 var serverURL = 'http://127.0.0.1:1337/restaurants'
@@ -16,7 +14,6 @@ var staticAssets = [
   '/js/main_bundle.js',
   '/js/restaurant_bundle.js',
   serverURL,
-  'js/dbhelper.js',
   '/worker.js'
 ]
 
@@ -54,21 +51,24 @@ self.addEventListener('fetch', function(event) {
   const request = event.request;
   const requestUrl = new URL(request.url)
 
-    if (requestUrl.port === "1337") {
-      if (request.url.includes('reviews') && request.method !== 'POST') {
-        var id = requestUrl.searchParams.get('restaurant_id')
+  if (requestUrl.port === '1337') {
+    if (request.url.includes('reviews') && request.method !== 'POST') {        
+      var indexId = +requestUrl.searchParams.get('restaurant_id');
         event.respondWith(
-          readByIndex('reviews', id)
+          //check for reviews from indexeddb by restaurant id
+          readByIndex('reviews','restaurant_id',indexId)
             .then(reviews => {
+              console.log(reviews)
               // check for reviews in IndexedDB
               if (reviews.length) {
-                console.log('from idb')
+                console.log('from idb reviews')
                 return reviews;
               }
               //fetch request normally and write to IndexedDB
               return fetch(request) 
                 .then(response => response.json())
                 .then(reviews => {
+                  console.log('gotta write em in', reviews)
                   reviews.forEach(review => {
                     writeData('reviews', review)
                   })
@@ -84,6 +84,7 @@ self.addEventListener('fetch', function(event) {
           readAllData('restaurants')
           .then(restaurants => {
             if (restaurants.length) {
+              console.log('from idb restaurants')
               return restaurants;
             }
             // else get from network and save to IndexedDB
@@ -145,7 +146,6 @@ self.addEventListener('sync', (event) => {
               console.log('Error saving review');
             } else {
               // do some other stuff
-              console.log('we added a review to the server')
               window.location.href = `/restaurant.html?id=${self.restaurant.id}`;
             }
           });

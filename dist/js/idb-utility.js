@@ -27,11 +27,12 @@ var dbPromise = idb.open('restaurant-store', 3, upgradeDB => {
     })
   }
 
-  function readByIndex(str, id) {
+  function readByIndex(str, idx, key) {
     return dbPromise.then(db => {
-      var tx = db.transaction(str, 'readonly');
-      var store = tx.objectStore(str);
-      var index = store.index('restaurant_id')
-      return index.getAll(id)
-    })
+      return db
+        .transaction(str)
+        .objectStore(str)
+        .index(idx)
+        .getAll(key);
+    });
   }

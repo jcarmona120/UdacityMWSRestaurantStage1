@@ -153,7 +153,9 @@ submitButton.addEventListener('click', (event) => {
  
   var date = new Date(Date.now())
   var parsedDate = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
-  
+
+
+
   var review = {
     name,
     rating,
@@ -163,10 +165,8 @@ submitButton.addEventListener('click', (event) => {
   }
 
   //close modal
-  const reviewsModal = document.getElementById('addReviewModal')
-  const opaqueContent = document.getElementById('maincontent')
-  reviewsModal.style.display = 'none';
-  opaqueContent.style.opacity = '1';
+  // reviewsModal.style.display = 'none';
+  // opaqueContent.style.opacity = '1';
   
 
   //register Background Sync
@@ -181,13 +181,11 @@ submitButton.addEventListener('click', (event) => {
           command: 'sendReview'
         })
         worker.onmessage = result => {
-            console.log(result)
+            console.log('syncing')
             return sw.sync.register('send-review');
         }
       })
   }
-
-
 
   const ul = document.getElementById('reviews-list');
   ul.appendChild(createReviewHTML(review));
