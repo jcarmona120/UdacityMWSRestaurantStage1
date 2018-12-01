@@ -645,6 +645,42 @@
         "createdAt": "2018-12-01T00:29:06.202Z",
         "updatedAt": "2018-12-01T00:29:06.202Z",
         "id": 45
+      },
+      {
+        "restaurant_id": 3,
+        "name": "Jawann",
+        "rating": "5",
+        "comments": "I really don't like this.",
+        "createdAt": "2018-12-01T00:32:43.004Z",
+        "updatedAt": "2018-12-01T00:32:43.004Z",
+        "id": 46
+      },
+      {
+        "restaurant_id": 1,
+        "name": "Jawann",
+        "rating": "5",
+        "comments": "I really don't like this.",
+        "createdAt": "2018-12-01T00:34:17.860Z",
+        "updatedAt": "2018-12-01T00:34:17.860Z",
+        "id": 47
+      },
+      {
+        "restaurant_id": 1,
+        "name": "Jawann",
+        "rating": "5",
+        "comments": "I really don't like this.",
+        "createdAt": "2018-12-01T00:34:29.118Z",
+        "updatedAt": "2018-12-01T00:34:29.118Z",
+        "id": 48
+      },
+      {
+        "restaurant_id": 1,
+        "name": "Jawann",
+        "rating": "5",
+        "comments": "I love this. I'm kidding.",
+        "createdAt": "2018-12-01T00:34:29.120Z",
+        "updatedAt": "2018-12-01T00:34:29.120Z",
+        "id": 49
       }
     ]
   },
@@ -700,7 +736,7 @@
       "id": 10
     },
     "reviews": {
-      "id": 45
+      "id": 49
     }
   }
 }

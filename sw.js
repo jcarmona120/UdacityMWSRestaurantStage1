@@ -140,6 +140,7 @@ self.addEventListener('sync', (event) => {
       .then(data => {
         var storedReviews = data;
         storedReviews.forEach(review => {
+          console.log(review)
           DBHelper.sendRestaurantReview(review.id, review.name, review.rating, review.comments,
             (error, review) => {
             if (error) {
@@ -150,9 +151,7 @@ self.addEventListener('sync', (event) => {
             }
           });
         })
-
       })
-
   }
 })
 
